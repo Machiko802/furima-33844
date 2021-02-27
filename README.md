@@ -17,8 +17,8 @@
 ## Association
 
 has_many :items
-has_many :purchased_item 
-has_one :address
+has_many :purchase_records
+has_one :customer_address
 
 ## itemsテーブル
 
@@ -31,13 +31,14 @@ has_one :address
 ｜ status        | string        | nul: false                    |
 ｜ delivery_fee  | integer       | nul: false                    |
 ｜ shipping_area | string        | nul: false                    |
+｜ delivery_days | string        | nul: false                    |
 ｜ price         | integer       | nul: false                    |
 ｜ user          | references    | nul: false, foreign_key: true |
 
 ## Association
 
 belongs_to :user
-has_one :purchased_item
+has_one :purchase_record
 
 ## purchase_recordsテーブル
 
@@ -45,15 +46,25 @@ has_one :purchased_item
 ｜ -------------- | ---------- | ----------------------------- |
 ｜ user           | references | nul: false, foreign_key: true |
 ｜ item           | references | nul: false, foreign_key: true |
-｜ post_code      | integer    | nul: false                    |
-｜ prefecture     | string     | nul: false                    |
-｜ city           | string     | nul: false                    |
-｜ block          | string     | nul: false                    |
-｜ building       | string     | nul: false                    |
-｜ phone_number   | string     | nul: false                    |
 
 
 ## Association
 belongs_to :user
 belongs_to :item
+has_one :customer_address
 
+## customer_addresses
+
+｜ Column          | Type       | Options                       |
+｜ --------------- | ---------- | ----------------------------- |
+｜ post_code       | integer    | nul: false                    |
+｜ prefecture      | string     | nul: false                    |
+｜ city            | string     | nul: false                    |
+｜ block           | string     | nul: false                    |
+｜ building        | string     | nul: false                    |
+｜ phone_number    | string     | nul: false                    |
+｜ purchase_record | references | nul: false, foreign_key: true |
+
+## Association
+
+belongs_to :purchase_record
