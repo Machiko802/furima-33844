@@ -11,7 +11,6 @@
 ｜ last_name_kana     |  string  | nul: false               |
 ｜ email              |  string  | nul: false, unique: true |
 ｜ encrypted_password |  string  | nul: false               |
-｜ phone_number       |  string  | nul: false               |
 ｜ birthday           |  date    | nul: false               |
 
 ## Association
@@ -55,8 +54,8 @@ has_one :customer_address
 
 ｜ Column          | Type       | Options                       |
 ｜ --------------- | ---------- | ----------------------------- |
-｜ post_code       | integer    | nul: false                    |
-｜ prefecture_id   | string     | nul: false                    |
+｜ post_code       | string     | nul: false                    |
+｜ prefecture_id   | integer    | nul: false                    |
 ｜ city            | string     | nul: false                    |
 ｜ block           | string     | nul: false                    |
 ｜ building        | string     |                               |
