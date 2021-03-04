@@ -28,7 +28,7 @@ has_many :purchase_records
 ｜ status_id        | integer       | nul: false                   |
 ｜ delivery_fee_id  | integer       | nul: false                    |
 ｜ prefecture_id    | integer       | nul: false                   |
-｜ delivery_days_id | integer       | nul: false                   |
+｜ delivery_day_id | integer        | nul: false                   |
 ｜ price            | integer       | nul: false                    |
 ｜ user             | references    | nul: false, foreign_key: true |
 
