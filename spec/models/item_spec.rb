@@ -32,7 +32,7 @@ RSpec.describe Item, type: :model do
       it 'priceが空だと登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is invalid')
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
       it 'priceが全角だと登録できない' do
