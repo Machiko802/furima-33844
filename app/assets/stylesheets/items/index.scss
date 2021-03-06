@@ -242,6 +242,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  list-style: none;
 }
 
 .item-lists>.list {
@@ -307,5 +308,6 @@ a {
 .star-count {
   font-size: 2vh;
 }
+
 
 /* //商品一覧 */
