@@ -1,6 +1,7 @@
 class PurchaseRecordsController < ApplicationController
-  before_action :item, only: [:index, :create]
+  before_action :item, only: [:index, :create, :purchase]
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :purchase, only: [:index, :create]
 
   def index
     @purchase_record_address = PurchaseRecordAddress.new
@@ -34,5 +35,11 @@ class PurchaseRecordsController < ApplicationController
         card: purchase_params[:token],
         currency: 'jpy'
       )
+  end
+
+  def purchase
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 end
