@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :specific_item, only: [:show, :edit, :update]
-  before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     @items = Item.all.order(id: 'DESC')
@@ -56,11 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if current_user.id != @item.user_id
-      redirect_to root_path
-    elsif PurchaseRecord.where(item_id: @item.id).exists?
-      redirect_to root_pat
-    else
-    end
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 end
