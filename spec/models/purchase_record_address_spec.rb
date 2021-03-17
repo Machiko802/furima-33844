@@ -18,38 +18,37 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       @purchase_record_address.post_code = ''
       @purchase_record_address.valid?
       expect(@purchase_record_address.errors.full_messages).to include("Post code can't be blank")
-    end                 
+    end
     it 'post_codeにハイフンが入っていないと保存ができないこと' do
       @purchase_record_address.post_code = '1234567'
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+      expect(@purchase_record_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
     end
     it 'prefectureを選択していないと保存ができないこと' do
       @purchase_record_address.prefecture_id = ''
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to  include("Prefecture can't be blank")
+      expect(@purchase_record_address.errors.full_messages).to include("Prefecture can't be blank")
     end
     it 'cityは空だと保存ができないこと' do
       @purchase_record_address.city = ''
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to  include("City can't be blank")
-             
+      expect(@purchase_record_address.errors.full_messages).to include("City can't be blank")
     end
     it 'blockは空だと保存ができないこと' do
       @purchase_record_address.block = ''
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to  include("Block can't be blank")
+      expect(@purchase_record_address.errors.full_messages).to include("Block can't be blank")
     end
     it 'phone_numberが空だと保存ができないこと' do
       @purchase_record_address.phone_number = ''
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to  include("Phone number can't be blank")
+      expect(@purchase_record_address.errors.full_messages).to include("Phone number can't be blank")
     end
     it 'phone_numberが１１桁以上だと保存ができないこと' do
       @purchase_record_address.phone_number = '123456789101112'
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to include("Phone number is the wrong length (should be 11 characters)")
-    end                                                    
+      expect(@purchase_record_address.errors.full_messages).to include('Phone number is the wrong length (should be 11 characters)')
+    end
     it 'item_idが紐づいていないと保存ができないこと' do
       @purchase_record_address.item_id = nil
       @purchase_record_address.valid?
@@ -58,7 +57,7 @@ RSpec.describe PurchaseRecordAddress, type: :model do
     it 'user_idが紐づいていないと保存ができないこと' do
       @purchase_record_address.user_id = nil
       @purchase_record_address.valid?
-      expect(@purchase_record_address.errors.full_messages).to include("User can't be blank")      
+      expect(@purchase_record_address.errors.full_messages).to include("User can't be blank")
     end
     it 'tokenが空だと保存ができない' do
       @purchase_record_address.token = ''
