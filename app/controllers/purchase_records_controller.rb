@@ -28,6 +28,14 @@ class PurchaseRecordsController < ApplicationController
     params.require(:purchase_record_address).permit(:post_code, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token] )
   end
 
+  def purchase
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    else PurchaseRecord.where(item_id: @item.id).exists?
+      redirect_to root_path
+    end
+  end
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
@@ -37,9 +45,4 @@ class PurchaseRecordsController < ApplicationController
       )
   end
 
-  def purchase
-    if @item.user_id == current_user.id
-      redirect_to root_path
-    end
-  end
 end
