@@ -56,11 +56,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if current_user.id != @item.user_id
+    if current_user.id != @item.user_id || PurchaseRecord.where(item_id: @item.id).exists?
       redirect_to root_path
-    elsif PurchaseRecord.where(item_id: @item.id).exists?
-      redirect_to root_path
-    else
     end
   end
 end

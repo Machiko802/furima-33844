@@ -1,6 +1,6 @@
 class PurchaseRecordsController < ApplicationController
-  before_action :item, only: [:index, :create, :purchase]
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :item, only: [:index, :create, :purchase]
   before_action :purchase, only: [:index, :create]
 
   def index
@@ -31,12 +31,8 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def purchase
-    if @item.user_id == current_user.id
+    if @item.user_id == current_user.id || PurchaseRecord.where(item_id: @item.id).exists?
       redirect_to root_path
-    elsif
-      PurchaseRecord.where(item_id: @item.id).exists?
-      redirect_to root_path
-    else
     end
   end
 
