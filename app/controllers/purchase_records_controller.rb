@@ -33,9 +33,10 @@ class PurchaseRecordsController < ApplicationController
   def purchase
     if @item.user_id == current_user.id
       redirect_to root_path
-    else
+    elsif
       PurchaseRecord.where(item_id: @item.id).exists?
       redirect_to root_path
+    else
     end
   end
 
