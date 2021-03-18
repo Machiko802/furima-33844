@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe PurchaseRecordAddress, type: :model do
   describe 'アイテム購入情報の保存' do
     before do
-      item = FactoryBot.build(:item)
-      user = FactoryBot.build(:user)
-      @purchase_record_address = FactoryBot.build(:purchase_record_address)
+      item = FactoryBot.create(:item)
+      user = FactoryBot.create(:user)
+      @purchase_record_address = FactoryBot.build(:purchase_record_address, item_id: item.id, user_id: user.id )
+      sleep(1)
     end
-
+    
     context "商品の購入ができる時" do
       it '全ての情報が正しく入力されていたら、保存ができる' do
         @purchase_record_address.valid?
@@ -17,9 +18,7 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         @purchase_record_address.valid?
       end
     end
-
     context "商品の購入ができない時" do
-
       it 'post_codeが空だと保存ができないこと' do
       @purchase_record_address.post_code = ''
       @purchase_record_address.valid?
@@ -35,10 +34,10 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'prefectureは、「---」(idが０）では保存ができない' do
-        @purchase_record_address.prefecture_id = 0
+      it 'prefectureは、「---」(idが1）では保存ができない' do
+        @purchase_record_address.prefecture_id = 1
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("User can't be blank")
+        expect(@purchase_record_address.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'cityは空だと保存ができないこと' do
         @purchase_record_address.city = ''
