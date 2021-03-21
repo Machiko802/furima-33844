@@ -39,8 +39,6 @@ class ItemsController < ApplicationController
     if current_user.id == item.user_id
       item.destroy
       redirect_to root_path
-    else
-      redirect_to action: index
     end
   end
 
@@ -56,6 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
+    @item = Item.find(params[:id])
     if current_user.id != @item.user_id || PurchaseRecord.where(item_id: @item.id).exists?
       redirect_to root_path
     end
